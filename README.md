@@ -15,3 +15,6 @@ Steps:
 6. detect collision with a wall
 7. detect collision with a tail
 
+<img src="snake1.jpg" alt="snake1">
+<img src="snake2.jpg" alt="snake2">
+
