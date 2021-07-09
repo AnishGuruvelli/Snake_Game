@@ -39,6 +39,18 @@ class Snake:
         new_segment.goto(position)
         self.segments.append(new_segment)
 
+    # we are adding this code for the high score feature
+    def reset(self):
+        # we are clearing all the parts of the snake, but we cant completely reset it, it will still appear on the board,
+        # and since our board is 600 by 600 we need to shift the snake segments to a location that insnt visible
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        #     this will make sure that it will disappear off the screen
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+    #     we are repeating the entire code that is in init cuz we are initialising again
+
     def extend(self):
         # add a new segment as soon as it touches the food
         self.add_segment(self.segments[-1].position())
