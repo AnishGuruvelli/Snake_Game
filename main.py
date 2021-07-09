@@ -7,7 +7,7 @@ from scoreboard import Score
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
-screen.title("Anish Is Cute")
+screen.title("Snake Game")
 
 screen.tracer(0)
 # Turn turtle animation on/off and set delay for update drawings. If n is given, only each n-th regular screen update
@@ -47,9 +47,12 @@ while game_is_on:
 
     # detect collision with a wall
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        game_is_on = False
+        # game_is_on = False, now we dont want this statement as we want it to run multiple times cuz we are showing
+        # the high score too
         print("hello world")
-        score.game_over()
+        # score.game_over()
+        score.reset()
+        snake.reset()
 
     # detect collision with tail
     # if the head collides with any segment of the snake/tail:
@@ -63,21 +66,23 @@ while game_is_on:
         # but in this if loop in the beginning the snake head will be close to the snake segments so we need to bypass
         # the head and this we will do by if and elif and passing the if statement
 
-    # for segment in snake.segments:
+    # detect collision with tail
+    for segment in snake.segments:
 
-    #     if segment == snake.head:
-    #         pass
+        if segment == snake.head:
+            pass
 
-    #     elif snake.head.distance(segment) < 10:
+        elif snake.head.distance(segment) < 10:
+            # game_is_on = False
+            # score.game_over(); we dont want these statements cuz we are including the high score feature too
+            score.reset()
+            snake.reset()
+
+    # # using the concept of slicing
+    # for segment in snake.segments[1:]:
+    #     # this will give everything apart from the first element which is what we want
+    #     if snake.head.distance(segment) < 10:
     #         game_is_on = False
     #         score.game_over()
-
-
-    # using the concept of slicing
-    for segment in snake.segments[1:]:
-        # this will give evrything apart from the forst element which is what we want
-        if snake.head.distance(segment) < 10:
-            game_is_on = False
-            score.game_over()
 
 screen.exitonclick()
