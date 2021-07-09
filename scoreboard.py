@@ -24,7 +24,12 @@ class Score(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
-        self.high_score = 0
+        # self.high_score = 0
+        # we wont be using this line and we will take input from the data.txt file itself
+        # data.txt - this file is created so that we get to know the high score and store it in a file
+        with open("data.txt") as data:
+            # we will use the with keyword so that we don't have to manage the closing of file, python will manage it
+            self.high_score = int(data.read())
         self.penup()
         self.color("white")
         self.goto(0, 270)
@@ -40,6 +45,8 @@ class Score(Turtle):
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
+            with open("data.txt", mode="w") as data:
+                data.write(f"{self.high_score}")
         self.score = 0
         self.update_score()
 
